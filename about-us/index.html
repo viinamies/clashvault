@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clash Vault - About Us</title>
+<link rel="icon" type="image/x-icon" href="https://ichef.bbci.co.uk/ace/standard/1680/cpsprodpb/a2c0/live/bac6fa80-06e3-11ef-bee9-6125e244a4cd.png">
+
+<style>
+body {margin:0;font-family:Arial;background:#0f172a;color:white;overflow-x:hidden;scroll-behavior:smooth;}
+header {background:#020617;padding:20px;text-align:center;font-size:30px;font-weight:bold;color:#38bdf8;}
+nav {display:flex;justify-content:center;gap:20px;background:#020617;padding-bottom:10px;}
+nav a {color:#94a3b8;text-decoration:none;} nav a:hover {color:white;}
+
+.hero {position:relative;text-align:center;padding:120px 20px;background:linear-gradient(-45deg,#1b285d,#000610,#0f172a,#1e293b);background-size:400% 400%;animation:gradientMove 12s ease infinite;overflow:hidden;}
+@keyframes gradientMove {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.hero::before {content:"";position:absolute;width:200%;height:200%;top:-50%;left:-50%;background:radial-gradient(circle,rgba(255,255,255,0.05)10%,transparent 60%);animation:smokeMove 20s linear infinite;}
+@keyframes smokeMove {0%{transform:translate(0,0)}50%{transform:translate(50px,-50px)}100%{transform:translate(0,0)}}
+
+.hero::after {content:"";position:absolute;bottom:0;left:0;width:100%;height:150px;background:linear-gradient(to top,rgba(255,100,0,0.3),transparent);animation:fireFlicker 2s infinite alternate;}
+@keyframes fireFlicker {0%{opacity:.3}100%{opacity:.6}}
+
+.hero h1 {font-size:42px;position:relative;z-index:2;}
+.hero p {color:#94a3b8;position:relative;z-index:2;}
+
+.vault {
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+    color: #38bdf8;
+    position: relative;
+    z-index: 2;
+}
+
+.about-section {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:40px;
+    padding:60px 40px;
+}
+
+.about-box {
+    background:#1e293b;
+    padding:30px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.about-box:hover {
+    transform:translateY(-8px);
+    box-shadow:0 0 20px rgba(56,189,248,0.3);
+}
+
+.about-title {
+    font-size:24px;
+    color:#38bdf8;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.about-box ul {
+    list-style:none;
+    padding:0;
+}
+
+.about-box ul li {
+    margin-bottom:12px;
+    padding-left:20px;
+    position:relative;
+}
+
+.about-box ul li::before {
+    content:"✔";
+    position:absolute;
+    left:0;
+    color:#22c55e;
+}
+
+footer {text-align:center;padding:20px;background:#121227;color:#94a3b8;}
+</style>
+</head>
+
+<body>
+
+<header>Clash Vault</header>
+
+<nav>
+<a href="/main/">Get Back</a>
+<span>•</span>
+<a href="https://discord.gg/mTrFmjwha3" target="_blank">Discord</a>
+</nav>
+
+<section class="hero" id="hero">
+<div class="vault">Why Choose Clash Vault?</div>
+<p>Trusted marketplace for Clash Accounts</p>
+</section>
+
+<section class="about-section">
+
+<div class="about-box">
+<div class="about-title">Why Choose Clash Vault?</div>
+<ul>
+<li>Trusted & verified sellers</li>
+<li>Safe and risk-free transactions</li>
+<li>Fast delivery after purchase</li>
+<li>Affordable prices</li>
+<li>Active support via Discord</li>
+<li>Growing trusted community</li>
+</ul>
+</div>
+
+<div class="about-box">
+<div class="about-title">We Offer!</div>
+<ul>
+<li>High-level Clash of Clans accounts</li>
+<li>High-level Clash Royale accounts</li>
+<li>Budget-friendly offers</li>
+<li>Instant account delivery</li>
+<li>Full access accounts</li>
+<li>Giveaways</li>
+</ul>
+</div>
+
+</section>
+
+<footer>© 2026 Clash Vault</footer>
+
+</body>
+</html>

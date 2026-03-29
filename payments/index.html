@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clash Vault - Store</title>
+<link rel="icon" type="image/x-icon" href="https://ichef.bbci.co.uk/ace/standard/1680/cpsprodpb/a2c0/live/bac6fa80-06e3-11ef-bee9-6125e244a4cd.png">
+
+<style>
+body {
+    margin:0;
+    font-family:Arial;
+    background:#0f172a;
+    color:white;
+}
+
+header {
+    background:#020617;
+    padding:20px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#38bdf8;
+}
+
+.container {
+    max-width:600px;
+    margin:40px auto;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 30px rgba(56,189,248,0.2);
+}
+.container {
+    position: relative;
+}
+
+.tabs {
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tab {
+    color: rgba(255, 255, 255, 0.533);
+    flex:1;
+    padding:10px;
+    background:#020617;
+    border-radius:8px;
+    text-align:center;
+    cursor:pointer;
+}
+.tab:hover { 
+    color: white;
+}
+
+.tab.active {
+    background:#38bdf8;
+}
+
+.section {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    height: auto;
+}
+
+.option-btn {
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:8px;
+    border:none;
+    background:#020617;
+    color:white;
+    cursor:pointer;
+}
+
+.option-btn:hover,
+.option-btn.active {
+    background:#38bdf8;
+}
+
+.toggle {
+    margin-top:10px;
+    text-align:center;
+    cursor:pointer;
+    color:#94a3b8;
+}
+.toggle:hover { color:white; }
+
+.hidden { display:none; }
+
+.price {
+    color:#22c55e;
+    margin-top:10px;
+}
+
+.btn {
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    background:#38bdf8;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+footer {
+    text-align:center;
+    padding:20px;
+    color:#94a3b8;
+}
+.backmain {
+    display:block;
+    max-width:630px;
+    margin:20px auto 0 auto;
+    color:white;
+    text-decoration:none;
+}
+
+.backmain:hover {
+    color:#38bdf8;
+}
+</style>
+</head>
+<body>
+
+<header>Clash Vault Store</header>
+
+<a href="/main/" class="backmain">Back</a>
+
+<div class="container">
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab('coc',this)">Clash of Clans</div>
+    <div class="tab" onclick="showTab('cr',this)">Clash Royale</div>
+    <div class="tab" onclick="showTab('other',this)">Other</div>
+</div>
+
+<div id="coc" class="section active">
+    <button class="option-btn" onclick="selectAccount(this,'TH16',110)">TH16 - 110€</button>
+    <button class="option-btn" onclick="selectAccount(this,'TH14',45)">TH14 - 45€</button>
+    <button class="option-btn" onclick="selectAccount(this,'TH11',27)">TH11 - 27€</button>
+
+    <div id="cocMore" class="hidden">
+        <button class="option-btn" onclick="selectAccount(this,'TH7',8)">TH7 - 8€</button>
+        <button class="option-btn" onclick="selectAccount(this,'TH5',5)">TH5 - 5€</button>
+    </div>
+
+    <div class="toggle" onclick="toggleMore('cocMore', this)">Show More</div>
+</div>
+
+<div id="cr" class="section">
+    <button class="option-btn" onclick="selectAccount(this,'Trophies 7.6k',31)">Trophies 7.6k - 31€</button>
+    <button class="option-btn" onclick="selectAccount(this,'Trophies 7k',25)">Trophies 7k - 25€</button>
+    <button class="option-btn" onclick="selectAccount(this,'Trophies 6k',19)">Trophies 6k - 19€</button>
+
+    <div id="crMore" class="hidden">
+        <button class="option-btn" onclick="selectAccount(this,'Trophies 3k',10)">Trophies 3k - 10€</button>
+        <button class="option-btn" onclick="selectAccount(this,'Trophies 10k',140)">Trophies 10k - 140€</button>
+    </div>
+
+    <div class="toggle" onclick="toggleMore('crMore', this)">Show More</div>
+</div>
+
+<div id="other" class="section">
+    <button class="option-btn" onclick="selectAccount(this,'Fortnite Special',20)">Fortnite Mako Glider - 20€</button>
+    <button class="option-btn" onclick="selectAccount(this,'Fortnite',75)">Fortnite - 75€</button>
+    <button class="option-btn" onclick="selectAccount(this,'Random',15)">Random Game - 15€</button>
+
+    <div id="otherMore" class="hidden">
+        <button class="option-btn" onclick="selectAccount(this,'GTA5 Enhanced',23)">GTA5 Enhanced - 23€</button>
+    </div>
+
+    <div class="toggle" onclick="toggleMore('otherMore', this)">Show More</div>
+</div>
+
+<h3>Selected</h3>
+<div id="selected">None</div>
+<div class="price" id="price"></div>
+
+<button class="btn" onclick="pay()">Pay with Stripe</button>
+
+</div>
+
+<footer>© 2026 Clash Vault</footer>
+
+<script>
+let selectedAccount = "";
+
+const stripeLinks = {
+    "TH16":"https://buy.stripe.com/8x2fZh9HudZi1Jb1YHc7u03",
+    "TH14":"https://buy.stripe.com/fZudR9g5S1cw0F746Pc7u04",
+    "TH11":"https://buy.stripe.com/14AaEXaLy7AU3Rj1YHc7u05",
+    "TH7":"https://buy.stripe.com/cNi3cvg5S8EYdrT0UDc7u07",
+    "TH5":"https://buy.stripe.com/6oUfZhcTG5sM0F79r9c7u08",
+
+    "Trophies 7.6k":"https://buy.stripe.com/3cI14n2f22gA4Vnbzhc7u09",
+    "Trophies 7k":"https://buy.stripe.com/eVq8wPcTGbRafA1eLtc7u0a",
+    "Trophies 6k":"https://buy.stripe.com/7sY28r1aY2gA3Rj6eXc7u0b",
+    "Trophies 3k":"https://buy.stripe.com/00w5kD4naf3mfA1dHpc7u0c",
+    "Trophies 10k":"https://buy.stripe.com/cNi5kD2f25sMbjL0UDc7u0d",
+
+    "Fortnite Special":"https://buy.stripe.com/9B6cN5g5S5sMafH8n5c7u0f",
+    "Fortnite":"https://buy.stripe.com/4gM14naLy4oI2Nf7j1c7u0e",
+    "GTA5 Enhanced":"https://buy.stripe.com/cNieVd06UaN6gE5cDlc7u0g"
+};
+
+function selectAccount(btn,name,price){
+    document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+
+    selectedAccount=name;
+    document.getElementById("selected").innerText=name;
+    document.getElementById("price").innerText="€"+price;
+}
+
+function toggleMore(id, el){
+    const section = document.getElementById(id);
+    section.classList.toggle("hidden");
+
+    el.innerText = section.classList.contains("hidden") ? "Show More" : "Show Less";
+}
+
+function showTab(tabId,el){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+
+    document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('active'));
+    selectedAccount="";
+    document.getElementById("selected").innerText="None";
+    document.getElementById("price").innerText="";
+}
+
+function pay(){
+    if(!selectedAccount){
+        alert("Select product first");
+        return;
+    }
+
+    const link = stripeLinks[selectedAccount];
+
+    if(!link || link.includes("YOUR")){
+        alert("Stripe link not set");
+        return;
+    }
+
+    window.location.href = link;
+}
+function showTab(tabId,el){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+
+    document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('active'));
+    selectedAccount="";
+    document.getElementById("selected").innerText="None";
+    document.getElementById("price").innerText="";
+}
+</script>
+
+</body>
+</html>

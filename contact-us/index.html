@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clash Vault - Contact Us</title>
+<link rel="icon" type="image/x-icon" href="https://ichef.bbci.co.uk/ace/standard/1680/cpsprodpb/a2c0/live/bac6fa80-06e3-11ef-bee9-6125e244a4cd.png">
+<style>
+body {margin:0;font-family:Arial;background:#0f172a;color:white;overflow-x:hidden;scroll-behavior:smooth;}
+header {background:#020617;padding:20px;text-align:center;font-size:30px;font-weight:bold;color:#38bdf8;}
+nav {display:flex;justify-content:center;gap:20px;background:#020617;padding-bottom:10px;}
+nav a {color:#94a3b8;text-decoration:none;} nav a:hover {color:white;}
+
+.hero {position:relative;text-align:center;padding:120px 20px;background:linear-gradient(-45deg,#1b285d,#000610,#0f172a,#1e293b);background-size:400% 400%;animation:gradientMove 12s ease infinite;overflow:hidden;}
+@keyframes gradientMove {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.hero::before {content:"";position:absolute;width:200%;height:200%;top:-50%;left:-50%;background:radial-gradient(circle,rgba(255,255,255,0.05)10%,transparent 60%);animation:smokeMove 20s linear infinite;}
+@keyframes smokeMove {0%{transform:translate(0,0)}50%{transform:translate(50px,-50px)}100%{transform:translate(0,0)}}
+
+.hero::after {content:"";position:absolute;bottom:0;left:0;width:100%;height:150px;background:linear-gradient(to top,rgba(255,100,0,0.3),transparent);animation:fireFlicker 2s infinite alternate;}
+@keyframes fireFlicker {0%{opacity:.3}100%{opacity:.6}}
+
+.bg-title {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:120px;font-weight:bold;color:rgba(255,255,255,0.03);z-index:1;}
+.hero h1,.hero p,.btn {position:relative;z-index:2;}
+.hero h1 {font-size:42px;}
+.hero p {color:#94a3b8;}
+
+.btn {margin-top:20px;padding:12px 25px;background:#38bdf8;border:none;border-radius:8px;cursor:pointer;font-size:16px;transition:.3s;}
+.btn:hover {background:#0ea5e9;transform:scale(1.05);} 
+
+#particles {position:absolute;width:100%;height:100%;z-index:1;top:0;left:0;}
+
+.scroll-indicator {margin-top:40px;font-size:14px;opacity:.7;animation:bounce 2s infinite;}
+@keyframes bounce {0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+.filters {text-align:center;padding:20px;}
+.filters button {margin:5px;padding:8px 15px;border:none;border-radius:6px;background:#1e293b;color:white;cursor:pointer;}
+.filters button:hover {background:#38bdf8;}
+
+.products {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:40px;transition:.3s;}
+.card {background:#1e293b;padding:20px;border-radius:12px;transition:.3s;}
+.card:hover {transform:translateY(-10px);box-shadow:0 0 20px rgba(56,189,248,0.3);} 
+.price {color:#22c55e;font-size:20px;margin:10px 0;}
+.tag {font-size:12px;color:#38bdf8;}
+
+footer {text-align:center;padding:20px;background:#121227;color:#94a3b8;}
+.section-title {
+    text-align:center;
+    font-size:28px;
+    color:#38bdf8;
+    margin-top:10px;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<header>Clash Vault</header>
+<nav><a href="/main/">Get Back</a><a>•</a><a href="https://discord.gg/mTrFmjwha3" target="_blank">Discord</a></nav>
+
+<section class="hero" id="hero">
+<canvas id="particles"></canvas>
+<h1>Contact Us!</h1>
+<p>You can contact owner (Spectre) on discord!</p>
+<div style="margin-top:15px;text-align:center;">
+    <button class="btn" onclick="copyDiscord()">Copy Discord</button>
+    <p id="copyStatus" style="color:#22c55e;display:none;margin-top:8px;">
+        Discord Name Copied!
+    </p>
+</div>
+</section>
+<script>
+    function copyDiscord(){
+    const discord = "spectre_p2p";
+
+    navigator.clipboard.writeText(discord).then(() => {
+        const status = document.getElementById("copyStatus");
+        status.style.display = "block";
+
+        setTimeout(()=>{
+            status.style.display = "none";
+        }, 2000);
+    });
+}
+</script>
+
+
+</section>
+
+<footer>© 2026 Clash Vault</footer>
+
+<script>
+function scrollToProducts(){
+const section=document.getElementById('products');
+section.scrollIntoView({behavior:'smooth'});
+section.style.boxShadow="0 0 40px rgba(56,189,248,0.3)";
+setTimeout(()=>section.style.boxShadow="none",1500);
+}
+
+function buyNow(acc){alert('Selected: '+acc);}
+
+function filter(type){
+document.querySelectorAll('.card').forEach(c=>{
+c.style.display=(type==='all'||c.dataset.type===type)?'block':'none';
+});}
+
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=document.getElementById('hero').offsetHeight;
+let particles=[];
+for(let i=0;i<80;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,dx:(Math.random()-.5)*.5,dy:(Math.random()-.5)*.5});}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});requestAnimationFrame(animate);}animate();
+
+window.addEventListener('scroll',()=>{
+let offset=window.scrollY;
+document.getElementById('hero').style.backgroundPosition=`center ${offset*.3}px`;
+});
+</script>
+
+</body>
+</html>
